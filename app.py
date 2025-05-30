@@ -1,19 +1,19 @@
 import json
-from dotenv import dotenv_values
+import os
 from flask import Flask, render_template, request
-from openai import OpenAI 
+from openai import OpenAI
+from dotenv import load_dotenv
 
-config = dotenv_values(".env")
-client = OpenAI(api_key=config["APIKEY"])  
+load_dotenv()
+client = OpenAI(api_key=os.environ["APIKEY"])
 
 app = Flask(
     __name__, template_folder="templates", static_url_path="", static_folder="static"
 )
 
-
 def get_colors(msg):
     response = client.chat.completions.create(
-        model="gpt-4.1-nano",  
+        model="gpt-4.1-nano",
         messages=[
             {
                 "role": "system",
@@ -30,8 +30,7 @@ def get_colors(msg):
     )
 
     raw = response.choices[0].message.content.strip()
-    return json.loads(raw)  
-
+    return json.loads(raw)
 
 @app.route("/palette", methods=["POST"])
 def prompt_to_palette():
@@ -39,11 +38,9 @@ def prompt_to_palette():
     colors = get_colors(query)
     return {"colors": colors}
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
-
 
 if __name__ == "__main__":
     app.run(debug=True)

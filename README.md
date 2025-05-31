@@ -1,7 +1,9 @@
 # 🎨 Colortone-AI
 
-Colortone-AI is a lightweight Flask-based web application that generates beautiful hex-based colour palettes from any prompt you provide — such as "Sunset", "Indian Flag", or "Vintage Vibes".  
+Colortone-AI is a lightweight Flask-based web application that generates beautiful hex-based colour palettes from any prompt you provide, such as "Sunset", "Indian Flag", or "Vintage Vibes".  
 It uses the OpenAI API to generate smart colour suggestions and renders them live on screen with vibrant transitions.
+
+Deployed Link: https://colortone.onrender.com/
 
 ---
 
